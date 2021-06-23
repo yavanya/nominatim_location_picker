@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
+
 
 class MapPage extends StatefulWidget {
   MapPage({
@@ -62,5 +64,15 @@ class _MapPageState extends State<MapPage> {
     return Container(
       child: body(context),
     );
+  }
+}
+
+
+class CachedNetworkTileProvider extends TileProvider {
+  const CachedNetworkTileProvider();
+
+  @override
+  ImageProvider getImage(Coords<num> coords, TileLayerOptions options) {
+    return CachedNetworkImageProvider(getTileUrl(coords, options));
   }
 }
